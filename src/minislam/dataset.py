@@ -2,7 +2,6 @@
 import os
 from abc import abstractmethod
 from collections import deque
-
 import cv2
 
 
