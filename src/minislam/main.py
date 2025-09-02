@@ -8,7 +8,7 @@ import yaml
 import numpy as np
 
 from minislam.camera import Camera
-from minislam.dataset import DataLoader, ImageLoader, VideoLoader
+from minislam.dataset import DataLoader, ImageLoader, VideoLoader, WebcamLoader
 from minislam.odometry import VisualOdometry
 from minislam.display2d import Display as Display2D
 from minislam.display3d import Display as Display3D
@@ -85,11 +85,18 @@ def main():
   camera = Camera(w, h, fx, fy, cx, cy)
 
   path = cfg["path"]
-  if os.path.isdir(path):
-    loader = ImageLoader(path)
-  elif os.path.isfile(path):
-    loader = VideoLoader(path)
-  else:
-    raise ValueError(f"Invalid path: {path}")
+  
+  # Check if path is a camera index (integer or string that can be converted to int)
+  try:
+    camera_index = int(path)
+    loader = WebcamLoader(camera_index)
+  except ValueError:
+    # Not a camera index, treat as file/directory path
+    if os.path.isdir(path):
+      loader = ImageLoader(path)
+    elif os.path.isfile(path):
+      loader = VideoLoader(path)
+    else:
+      raise ValueError(f"Invalid path: {path}")
 
   _main(camera, loader)

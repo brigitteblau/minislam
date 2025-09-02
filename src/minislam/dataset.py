@@ -52,3 +52,28 @@ class VideoLoader(DataLoader):
 
   def __iter__(self):
     return self
+
+
+class WebcamLoader(DataLoader):
+  def __init__(self, camera_index: int = 0):
+    # Don't call super().__init__ since we don't need a file path
+    self.camera_index = camera_index
+    self.cap = cv2.VideoCapture(camera_index)
+    if not self.cap.isOpened():
+      raise ValueError(f"Cannot open camera {camera_index}")
+    self.width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    self.height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+  def __next__(self):
+    ret, frame = self.cap.read()
+    if not ret:
+      raise StopIteration
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    return frame
+
+  def __iter__(self):
+    return self
+
+  def __del__(self):
+    if hasattr(self, 'cap'):
+      self.cap.release()
