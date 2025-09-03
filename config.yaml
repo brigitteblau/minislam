@@ -15,6 +15,14 @@ datasets:
     cy: 185.2
     w: 1241
     h: 376
+  test3:
+    path: eval/test2.mp4
+    fx: 718.856
+    fy: 718.856
+    cx: 607.2
+    cy: 185.2
+    w: 1241
+    h: 376
   webcam:
     path: 0
     fx: 718.856

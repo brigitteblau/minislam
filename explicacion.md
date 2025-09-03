@@ -1,4 +1,9 @@
 
+
+# uv run main la camara de aca 
+# uv run main  --dataset test2 corre el video del pasto (hablar con luca manana)
+
+
 # Visión general rápida
 **Qué ves en pantalla:** el visor 3D (OpenGL + pygame) dibuja:
 - una **franja de cámaras** (frustums) que representan las poses estimadas (roja la actual, verdes las pasadas)

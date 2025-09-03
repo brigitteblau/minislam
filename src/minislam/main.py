@@ -69,7 +69,7 @@ def _main(camera: Camera, data_loader: DataLoader):
 
 def main():
   parser = argparse.ArgumentParser()
-  parser.add_argument("--dataset", metavar="dataset", type=str, help="The target dataset in config.yaml", default="test2")
+  parser.add_argument("--dataset", metavar="dataset", type=str, help="The target dataset in config.yaml", default="webcam")
   args = vars(parser.parse_args())
   cfg = parse_cfg("config.yaml", args["dataset"])
 
